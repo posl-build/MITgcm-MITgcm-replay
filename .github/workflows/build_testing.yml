@@ -1,12 +1,10 @@
 name: build
 
 on:
-  push:
-  pull_request:
-
+  workflow_dispatch:
 jobs:
  forward:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
 
    strategy:
      matrix:
@@ -48,7 +46,7 @@ jobs:
          . tools/ci/runtr.sh
 
  tapenade:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
 
    strategy:
      matrix:
@@ -78,7 +76,7 @@ jobs:
          . tools/ci/runtr.sh
 
  tapenade-other:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
    if: ${{ contains(github.event.pull_request.labels.*.name, 'adjoint') }}
 
    strategy:
@@ -113,7 +111,7 @@ jobs:
          . tools/ci/runtr.sh
 
  doc_html:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
 
    continue-on-error: true
 
@@ -135,7 +133,7 @@ jobs:
          sphinx-build -Wa -b html -d _build_doctrees . _build/html
 
  doc_latex:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
 
    continue-on-error: true
 
